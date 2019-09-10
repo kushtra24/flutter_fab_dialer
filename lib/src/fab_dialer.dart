@@ -2,21 +2,28 @@ part of flutter_fab_dialer;
 
 class FabDialer extends StatefulWidget {
   // AnimationStyle is an optional parameter to avoid breaking changes
-  const FabDialer(this._fabMiniMenuItemList, this._fabColor, this._fabIcon,
-      [this._fabAnimationStyle = AnimationStyle.defaultAnimation]);
+  const FabDialer(
+      this._fabMiniMenuItemList,
+      this._fabColor,
+      this._fabIcon,
+      this.elevation,
+      [this._fabAnimationStyle = AnimationStyle.defaultAnimation]
+      );
 
   final List<FabMiniMenuItem> _fabMiniMenuItemList;
   final Color _fabColor;
   final Icon _fabIcon;
   final AnimationStyle _fabAnimationStyle;
+  final double elevation;
 
   @override
   FabDialerState createState() => new FabDialerState(
-      _fabMiniMenuItemList, _fabColor, _fabIcon, _fabAnimationStyle);
+      _fabMiniMenuItemList, _fabColor, _fabIcon, elevation, _fabAnimationStyle);
 }
 
 class FabDialerState extends State<FabDialer> with TickerProviderStateMixin {
-  FabDialerState(this._fabMiniMenuItemList, this._fabColor, this._fabIcon,
+
+  FabDialerState(this._fabMiniMenuItemList, this._fabColor, this._fabIcon, this.elevation,
       this._fabAnimationStyle);
 
   int _angle = 90;
@@ -24,6 +31,7 @@ class FabDialerState extends State<FabDialer> with TickerProviderStateMixin {
   final List<FabMiniMenuItem> _fabMiniMenuItemList;
   final Color _fabColor;
   final Icon _fabIcon;
+  final double elevation;
   final AnimationStyle _fabAnimationStyle;
   List<FabMenuMiniItemWidget> _fabMenuItems;
 
@@ -97,12 +105,14 @@ class FabDialerState extends State<FabDialer> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 new FloatingActionButton(
-                    child: new RotationTransition(
-                      turns: new AlwaysStoppedAnimation(_angle / 360),
-                      child: _fabIcon,
-                    ),
-                    backgroundColor: _fabColor,
-                    onPressed: _rotate)
+                  child: new RotationTransition(
+                    turns: new AlwaysStoppedAnimation(_angle / 360),
+                    child: _fabIcon,
+                  ),
+                  backgroundColor: _fabColor,
+                  onPressed: _rotate,
+                  elevation: elevation,
+                )
               ],
             ),
           ],

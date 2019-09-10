@@ -58,6 +58,7 @@ class FabMiniMenuItem {
 }
 
 class FabMenuMiniItemWidget extends StatelessWidget {
+
   const FabMenuMiniItemWidget(
       {Key key,
       this.elevation,
@@ -75,6 +76,7 @@ class FabMenuMiniItemWidget extends StatelessWidget {
       this.animationStyle,
       this.itemCount})
       : super(key: key);
+
   final double elevation;
   final String text;
   final Icon icon;

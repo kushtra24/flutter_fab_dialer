@@ -73,8 +73,16 @@ class _MyHomePageState extends State<MyHomePage> {
     ImageProvider img = new NetworkImage(getNewCatUrl());
 
     var _fabMiniMenuItemList = [
-      new FabMiniMenuItem.withTextWithImage(img, 4.0, "Button menu",
-          _logCounter, "Click me", Colors.blue, Colors.white, true),
+      new FabMiniMenuItem.withTextWithImage(
+          img,
+          4.0,
+          "Button menu",
+          _logCounter,
+          "Click me",
+          Colors.blue,
+          Colors.white,
+          true
+      ),
       new FabMiniMenuItem.withText(
           new Icon(Icons.add),
           Colors.blue,
@@ -84,11 +92,22 @@ class _MyHomePageState extends State<MyHomePage> {
           "Click me",
           Colors.blue,
           Colors.white,
-          true),
-      new FabMiniMenuItem.noText(new Icon(Icons.add), Colors.blue, 4.0,
-          "Navigate new screen", _navigateToAnotherScreen, false),
+          true
+      ),
+      new FabMiniMenuItem.noText(
+          new Icon(Icons.add),
+          Colors.blue, 4.0,
+          "Navigate new screen",
+          _navigateToAnotherScreen,
+          false
+      ),
       new FabMiniMenuItem.noTextWithImage(
-          img, 4.0, "Button menu", _incrementCounter, false)
+          img,
+          4.0,
+          "Button menu",
+          _incrementCounter,
+          false
+      )
     ];
 
     return new Scaffold(
@@ -107,7 +126,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          new FabDialer(_fabMiniMenuItemList, Colors.blue, new Icon(Icons.add)),
+          new FabDialer(
+              _fabMiniMenuItemList,
+              Colors.blue,
+              Icon(Icons.add),
+              1
+          ),
         ],
       ),
     );
