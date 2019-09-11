@@ -5,6 +5,7 @@
 library flutter_fab_dialer;
 
 import 'package:flutter/material.dart';
+import 'dart:math' as Math;
 
 part 'src/fab_dialer.dart';
 

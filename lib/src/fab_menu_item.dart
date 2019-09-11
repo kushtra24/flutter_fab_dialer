@@ -18,15 +18,16 @@ class FabMiniMenuItem {
   bool hideOnClick;
 
   FabMiniMenuItem.withText(
-      this.icon,
-      this.fabColor,
-      this.elevation,
-      this.tooltip,
-      this.onPressed,
-      this.text,
-      this.chipColor,
-      this.textColor,
-      this.hideOnClick);
+    this.icon,
+    this.fabColor,
+    this.elevation,
+    this.tooltip,
+    this.onPressed,
+    this.text,
+    this.chipColor,
+    this.textColor,
+    this.hideOnClick
+  );
 
   FabMiniMenuItem.withTextWithImage(
       this.image,
@@ -37,7 +38,7 @@ class FabMiniMenuItem {
       this.chipColor,
       this.textColor,
       this.hideOnClick) {
-    this.fabColor = null;
+      this.fabColor = null;
   }
 
   FabMiniMenuItem.noText(this.icon, this.fabColor, this.elevation, this.tooltip,

@@ -83,17 +83,19 @@ class _MyHomePageState extends State<MyHomePage> {
           Colors.white,
           true
       ),
+
       new FabMiniMenuItem.withText(
           new Icon(Icons.add),
-          Colors.blue,
+          Colors.red,
           4.0,
           "Button menu",
           _incrementCounter,
           "Click me",
-          Colors.blue,
-          Colors.white,
+          Colors.yellow,
+          Colors.green,
           true
       ),
+
       new FabMiniMenuItem.noText(
           new Icon(Icons.add),
           Colors.blue, 4.0,
@@ -101,6 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _navigateToAnotherScreen,
           false
       ),
+
       new FabMiniMenuItem.noTextWithImage(
           img,
           4.0,
@@ -126,11 +129,14 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          new FabDialer(
-              _fabMiniMenuItemList,
-              Colors.blue,
-              Icon(Icons.add),
-              1
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: new FabDialer(
+              fabMiniMenuItemList: _fabMiniMenuItemList,
+              fabIcon: Icon(Icons.access_time),
+              elevation: 2,
+              fabAnimationStyle: AnimationStyle.defaultAnimation,
+            ),
           ),
         ],
       ),

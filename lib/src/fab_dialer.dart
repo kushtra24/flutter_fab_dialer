@@ -2,29 +2,31 @@ part of flutter_fab_dialer;
 
 class FabDialer extends StatefulWidget {
   // AnimationStyle is an optional parameter to avoid breaking changes
-  const FabDialer(
-      this._fabMiniMenuItemList,
-      this._fabColor,
-      this._fabIcon,
+  FabDialer({
+      @required this.fabMiniMenuItemList,
+      this.fabColor = Colors.grey,
+      this.fabIcon,
       this.elevation,
-      [this._fabAnimationStyle = AnimationStyle.defaultAnimation]
-      );
+      this.closeFabIcon,
+      this.fabAnimationStyle = AnimationStyle.defaultAnimation
+});
 
-  final List<FabMiniMenuItem> _fabMiniMenuItemList;
-  final Color _fabColor;
-  final Icon _fabIcon;
-  final AnimationStyle _fabAnimationStyle;
+  final List<FabMiniMenuItem> fabMiniMenuItemList;
+  final Color fabColor;
+  final Icon fabIcon;
+  final AnimationStyle fabAnimationStyle;
   final double elevation;
+  final Icon closeFabIcon;
 
   @override
   FabDialerState createState() => new FabDialerState(
-      _fabMiniMenuItemList, _fabColor, _fabIcon, elevation, _fabAnimationStyle);
+      fabMiniMenuItemList, fabColor, fabIcon, elevation, fabAnimationStyle, closeFabIcon);
 }
 
 class FabDialerState extends State<FabDialer> with TickerProviderStateMixin {
 
   FabDialerState(this._fabMiniMenuItemList, this._fabColor, this._fabIcon, this.elevation,
-      this._fabAnimationStyle);
+      this._fabAnimationStyle, this.closeFabIcon);
 
   int _angle = 90;
   bool _isRotated = true;
@@ -32,6 +34,7 @@ class FabDialerState extends State<FabDialer> with TickerProviderStateMixin {
   final Color _fabColor;
   final Icon _fabIcon;
   final double elevation;
+  final Icon closeFabIcon;
   final AnimationStyle _fabAnimationStyle;
   List<FabMenuMiniItemWidget> _fabMenuItems;
 
@@ -92,26 +95,36 @@ class FabDialerState extends State<FabDialer> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-        margin: new EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-        child: new Column(
+    final Icon closeIcon = closeFabIcon == null
+        ? Icon(Icons.close)
+        : closeFabIcon;
+    return Container(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            new Column(
+            Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: _fabMenuItems,
             ),
-            new Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                new FloatingActionButton(
-                  child: new RotationTransition(
-                    turns: new AlwaysStoppedAnimation(_angle / 360),
-                    child: _fabIcon,
-                  ),
-                  backgroundColor: _fabColor,
-                  onPressed: _rotate,
-                  elevation: elevation,
+                AnimatedBuilder(
+                  animation: _controller,
+                  builder: (BuildContext _, Widget child) {
+                    return FloatingActionButton(
+                      elevation: elevation,
+                        child: Transform(
+                          transform: Matrix4.rotationZ(
+                              (2 * Math.pi) * _controller.value),
+                          alignment: Alignment.center,
+                          child: _controller.value >= 0.5
+                              ? closeIcon
+                              : _fabIcon,
+                        ),
+                        backgroundColor: _fabColor,
+                        onPressed: _rotate);
+                  },
                 )
               ],
             ),
